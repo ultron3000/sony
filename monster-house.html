@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monster House (2006)</title>
   <style>
     body {
@@ -13,13 +13,21 @@
       text-align: center;
       padding: 20px;
     }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
     video {
       width: 100%;
-      max-width: 900px;
+      max-width: 100%; /* Ensures full-width on mobile */
+      height: auto;
       border: 3px solid #00aaff;
       border-radius: 10px;
       background: black;
     }
+
     .back-button {
       margin-top: 20px;
       background-color: #00aaff;
@@ -30,6 +38,7 @@
       font-size: 1rem;
       text-decoration: none;
     }
+
     .back-button:hover {
       background-color: #0077cc;
     }
@@ -38,8 +47,16 @@
 </head>
 <body>
   <h1>Monster House (2006)</h1>
-  <video id="video" controls autoplay></video>
-  <br><a href="index.html" class="back-button">⬅ Back to Movie Collection</a>
+  
+  <!-- Video Player -->
+  <video id="video" controls autoplay>
+    <source src="https://kfo8mkce0fzdhlq.cdn-centaurus.com:443/hls2/01/01225/dp2d4yggu9ev_h/iframes-v1-a1.m3u8?t=eaaMmZZ0uNyZ_IIdENJV8Fy2bKQKreKDbdfgl5xXUNY&s=1745556915&e=129600&f=6129730&srv=pg8s50jw8kzp&i=0.4&sp=500&p1=pg8s50jw8kzp&p2=pg8s50jw8kzp&asn=24554" type="application/x-mpegURL">
+    Your browser does not support the video tag or the file format.
+  </video>
+
+  <!-- Back Button -->
+  <br>
+  <a href="index.html" class="back-button">⬅ Back to Sony Animation Collection</a>
 
   <script>
     const video = document.getElementById('video');
@@ -52,7 +69,7 @@
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = videoSrc;
     } else {
-      console.error("Your browser does not support HLS streaming.");
+      video.outerHTML = "<p>Sorry, your browser does not support HLS playback.</p>";
     }
   </script>
 </body>
