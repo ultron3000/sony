@@ -19,24 +19,13 @@
       margin-bottom: 20px;
     }
 
-    /* Ensure responsive iframe */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      background: black;
+    /* Ensure responsive video */
+    video {
+      width: 100%;
+      max-width: 900px;
       border: 3px solid #00aaff;
       border-radius: 10px;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      background: black;
     }
 
     .back-button {
@@ -54,17 +43,33 @@
       background-color: #0077cc;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
   <h1>Open Season (2006)</h1>
 
-  <!-- Video iframe player -->
-  <div class="video-container">
-    <iframe src="https://jd3me2pm2h.cdn-centaurus.com/hls2/01/00353/1ag521vosn69_h/master.m3u8?t=A8yyfcG08j0BokxU4__HFVh6yWZfdDsxCKRLVT2j-mY&s=1745558658&e=129600&f=1769139&srv=meuzahgd24x5v&i=0.4&sp=500&p1=meuzahgd24x5v&p2=meuzahgd24x5v&asn=24554" frameborder="0" allowfullscreen></iframe>
-  </div>
+  <!-- Video player -->
+  <video id="video" controls autoplay>
+    <source id="video-source" type="application/x-mpegURL">
+  </video>
 
   <!-- Back Button -->
   <br>
   <a href="index.html" class="back-button">⬅ Back to Sony Animation Collection</a>
+
+  <script>
+    const video = document.getElementById('video');
+    const videoSrc = "https://jd3me2pm2h.cdn-centaurus.com/hls2/01/00353/1ag521vosn69_h/master.m3u8?t=A8yyfcG08j0BokxU4__HFVh6yWZfdDsxCKRLVT2j-mY&s=1745558658&e=129600&f=1769139&srv=meuzahgd24x5v&i=0.4&sp=500&p1=meuzahgd24x5v&p2=meuzahgd24x5v&asn=24554";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+    } else {
+      console.error("Your browser does not support HLS streaming.");
+    }
+  </script>
 </body>
 </html>
