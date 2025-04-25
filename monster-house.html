@@ -19,24 +19,13 @@
       margin-bottom: 20px;
     }
 
-    /* Ensure responsive iframe */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      background: black;
+    /* Ensure responsive video */
+    video {
+      width: 100%;
+      max-width: 900px;
       border: 3px solid #00aaff;
       border-radius: 10px;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      background: black;
     }
 
     .back-button {
@@ -54,17 +43,33 @@
       background-color: #0077cc;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
   <h1>Monster House (2006)</h1>
 
-  <!-- Video iframe player -->
-  <div class="video-container">
-    <iframe src="https://kfo8mkce0fzdhlq.cdn-centaurus.com:443/hls2/01/01225/dp2d4yggu9ev_h/iframes-v1-a1.m3u8?t=eaaMmZZ0uNyZ_IIdENJV8Fy2bKQKreKDbdfgl5xXUNY&s=1745556915&e=129600&f=6129730&srv=pg8s50jw8kzp&i=0.4&sp=500&p1=pg8s50jw8kzp&p2=pg8s50jw8kzp&asn=24554" frameborder="0" allowfullscreen></iframe>
-  </div>
+  <!-- Video player -->
+  <video id="video" controls autoplay>
+    <source id="video-source" type="application/x-mpegURL">
+  </video>
 
   <!-- Back Button -->
   <br>
   <a href="index.html" class="back-button">⬅ Back to Sony Animation Collection</a>
+
+  <script>
+    const video = document.getElementById('video');
+    const videoSrc = "https://kfo8mkce0fzdhlq.cdn-centaurus.com:443/hls2/01/01225/dp2d4yggu9ev_h/iframes-v1-a1.m3u8?t=eaaMmZZ0uNyZ_IIdENJV8Fy2bKQKreKDbdfgl5xXUNY&s=1745556915&e=129600&f=6129730&srv=pg8s50jw8kzp&i=0.4&sp=500&p1=pg8s50jw8kzp&p2=pg8s50jw8kzp&asn=24554";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+    } else {
+      console.error("Your browser does not support HLS streaming.");
+    }
+  </script>
 </body>
 </html>
