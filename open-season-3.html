@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Season 3 (2010)</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    /* Ensure responsive video */
+    video {
+      width: 100%;
+      max-width: 900px;
+      border: 3px solid #00aaff;
+      border-radius: 10px;
+      background: black;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      background-color: #00aaff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #0077cc;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+  <h1>Open Season 3 (2010)</h1>
+
+  <!-- Video player -->
+  <video id="video" controls autoplay>
+    <source id="video-source" type="application/x-mpegURL">
+  </video>
+
+  <!-- Back Button -->
+  <br>
+  <a href="index.html" class="back-button">⬅ Back to Sony Animation Collection</a>
+
+  <script>
+    const video = document.getElementById('video');
+    const videoSrc = "https://lightningbolts.ru/_v27/Bx0MMQczCy8rHnB7KB4fLx8iJQwReAsEGB8lLwQdCH0ECnA5KyQbJSwKfD0Eehx9.m3u8?code=KAEbeSoBBH8FMHAkBB0APCseHycQHgciKyB8IyszJjAEIwB9BXoQMwUeIToqMHg-Kw4PfBAkDyMoMHAlBA4PIgQOEH0QJBh5BCMtJQd7GD4HMyIxB3sPJBAdIn0EMwsiECMQMxAjInwEMy57BCMLIxAjDHoEJAQ-Ex0YfQYNKjMEIxgwBx4cMxB7EyAQHQR4EHsAMwQNByAHHgclBDMEPhMjCDEEHSEkBCMIfRAkGD4HHSJ6ByQYeAceBDEQIyEkBCMIPgcNEDMTDQg-ByMcMAcNKn0EMxMjBh4MPhMOGD4TDQgwEx0AeBAdInoEHgcjBDMuPhMdBDETHSp9EyMEMAczHDEEMwh6BA0EPgczISAGHhMlEx4DJQczAyUEIxB7BA0qMwcNCHgQMyowEB0YPhB7HyAQIwx8Bw4cfQcOGyMHMxg-ECQTJRAjGDAEHQAxBDMuMBAzCDEHMyIzEx4fJAYeDHkHMwMiByQYMwQeBHoQHSI-BCQMewQkEH0TIwh6BCMtJQYNGDEEMwsjBCMceBAzIjMEHQgwBHsMeBAzCyUEewAzBCMQexMjHyUQewwzBg0qeAYdLnkEJAB9Ex4TIxAdAHgTHgAxBB0MexAjInwEDQR4BDMYfRMkEDEEexw-BCMfIAcdDHgEIy54Bg4fIAcNADAEHgB7Bw4cMBAkDH0QHgB5BCQDIAcNDyMHMyJ4Bg0fIwQzJSMEDhAwEB0EeRMjInsQHhsgByMDIwQdAD4HHgwwBA0uMwQNAD8EHQh9BApwOSskGyUsCnw9BHocfS8OIXktAQszBiBxPyseHycQHgc6K3ofIgUnB3kregMl";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+    } else {
+      console.error("Your browser does not support HLS streaming.");
+    }
+  </script>
+</body>
+</html>
